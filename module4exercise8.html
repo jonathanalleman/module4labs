@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Moment DateTime Format</title>
+<!-- reference Moment.js library -->
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.mi
+n.js"></script>
+</head>
+<body>
+<h2>Days since Birthday</h2>
+<div id="daysFromBD"></div>
+<h2>Days, Years, and Months since Birthday</h2>
+<div id="daysYearsMonthsSinceBD"></div>
+<h2>Which Day is Closer?</h2>
+<div id="closerday"></div>
+<h2>Which date came before?</h2>
+<div id="previousdate"></div>
+<h2>Time in London</h2>
+<div id="londonTime"></div>
+
+<script type="text/javascript">
+
+// instantiate a moment object
+let nowMoment = moment();
+// Number 1
+const birthday = '05/12/1989'
+let birthdayDate= moment(birthday, 'DD/MM/YYYY');
+const daysDifference = nowMoment.diff(birthdayDate, 'days')
+
+let displayBirthday = document.getElementById("daysFromBD");
+displayBirthday.innerText = `${daysDifference} days since ${birthdayDate}`;
+
+// 2
+const duration= moment.duration(nowMoment.diff(birthdayDate));
+const years = duration.years();
+const months = duration.months();
+const days = duration.days();
+
+let fulldisplayBD=document.getElementById("daysYearsMonthsSinceBD");
+fulldisplayBD.innerText=`${years} years, ${months} months, ${days} days, since ${birthdayDate}`
+
+// let eDisplayMoment = document.getElementById('displayMoment');
+// eDisplayMoment.innerHTML = nowMoment;
+// // display value of Date object in #displayJsDate div
+// let eDisplayDate = document.getElementById('displayJsDate');
+// eDisplayDate.innerHTML = nowDate;
+// })();
+
+// function(){
+//     var a= moment()
+//     var b = moment(1989,11,4)
+
+    
+
+</script>
+</body>
+</html>
