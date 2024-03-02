@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <template id="card-template">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-header">Header</div>
+                <img src="..." class="card-img-top" alt="clothes">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                </div>
+            </div>
+        </div>
+        
+    </template>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container p-3">
+        <h2>Fake Ecommerce store</h2>
+        <div class="filters">
+            <select name="catergory_filter" id=" catergory_filter" onchange="filterProducts(event)">
+                <option value="id">Default ordering</option>
+                <option value="price_hilo">Price (High to Low)</option>
+                <option value="price_lohi">Price (Low to High)</option>
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    
+    <script>
+        let categories = new Map();
+        let allProducts;
+
+
+        axios.get()
+            .then(response => {allProducts = response.data; loadProducts(response.data); loadFilterOptions();})
+        function loadProducts(products){
+            document.querySelector('#product-list').innerHTML='';
+            
+            products.forEach(product => {
+                let categorySlug=product.category.replaceAll(' ','_').replaceAll("'",'');
+                categories.set(product.category, categorySlug);
+
+                addProduct(product);
+            });
+
+            if (products.length == 0) document.querySelector('#product-list').innerHTML = '<p> No Matching Products.<p>';
+
+        }
+
+        function addProduct(item){
+            const template = document.getElementById("card-template").content.cloneNode(true);
+            template.querySelector('.card-title').innerText = item.title;
+            template.querySelector('.card-header').innerHTML=
+        }
+
+        //sort the products
+        function sortProducts(e) {
+            let selectedOrder= e.target.value;
+            let sortProducts = [...allProducts];
+
+            switch(selectedOrder){
+                case 'price_lohi': sortProducts.sort((p1, p2)=> p1.price- p2.price); break;
+                case 'price_hilo': sortProducts.sort((p1, p2)=> p2.price- p1.price); break;
+                case 'title_az': sortProducts.sort((p1, p2)=> p2.title == p1.title ? 0 : (p1.title))
+            }
+        }
+    </script>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <title>Moment DateTime Format</title>
 <!-- reference Moment.js library -->
 <script
-src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.mi
-n.js"></script>
+src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 </head>
+
 <body>
 <h2>Days since Birthday</h2>
 <div id="daysFromBD"></div>
@@ -57,19 +57,19 @@ const closerDateFx = (date1, date2) => {
     return `${diffA > diffB ? dateB : dateA} is closer than ${diffA > diffB ? dateA : dateB} compared to ${nowMoment}`;
 };
 let closerDate = document.getElementById("closerDate");
-closerDate.innerText= closerDateFx('05/12/1989', '09/10/2001');
+closerDate.innerText= closerDateFx('05/12/1989', '09/10/2001')
 
 //4
-const previousDateFX = (date1, date2) => {
+const previousDateFx = (date1, date2) => {
     let dateA = moment(date1, "DD/MM/YYYY");
     let dateB = moment(date2, "DD/MM/YYYY");
 
     if (dateA.isBefore(dateB)) {
-        return `The date ${dateA} is before ${dateB}`
+        return `The date ${dateA.format('DD/MM/YYYY')} is before ${dateB.format('DD/MM/YYYY')}`
     }
 
     else {
-        return `The date ${dateB} is before ${dateA}`
+        return `The date ${dateB.format('DD/MM/YYYY')} is before ${dateA.format('DD/MM/YYYY')}`
     } 
 };
 const previousDate = document.getElementById("previousDate");
