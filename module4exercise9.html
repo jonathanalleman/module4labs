@@ -29,6 +29,7 @@ fetch('https://fakestoreapi.com/products')
 .then((json) => {
 console.log(json)
 // use this JSON to find and set correct option data for the chart
+    updateChartOptions(json);
 })
 .then(() => {
 // Display the chart
@@ -36,6 +37,24 @@ myChart.setOption(options);
 })
 // Initialize the echarts instance based on the prepared div
 let myChart = echarts.init(document.getElementById('main'));
+
+function updateChartOptions(products){
+    let categories = new Map();
+    products.forEach(product => {
+        let existingCatCount= categories.get(product.category)
+
+        if (existingCatCount > 0){
+            categories.set(product.category, ++existingCatCount)
+        }
+        else {
+            categories.set(product.category, 1)
+        }
+    });
+    console.log(categories)
+    options.xAxis.data= [... categories.keys()]
+
+    options.series[0].data= [...categories.values()]
+}
 </script>
 </body>
 </html>
